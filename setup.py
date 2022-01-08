@@ -30,6 +30,6 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "License :: OSI Approved :: MIT License",
     ],
-    # package_dir={"": ""},
-    packages=find_packages(include=["data_analyst", "data_analyst.*"]),
+    # package_dir={"": "src"},
+    packages=find_packages(where= "src"),
 )
