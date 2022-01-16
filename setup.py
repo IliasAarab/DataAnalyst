@@ -30,6 +30,6 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "License :: OSI Approved :: MIT License",
     ],
-    # package_dir={"": "src"},
-    packages=find_packages(where= "src"),
+    package_dir={"":"src"},
+    packages=find_packages(where= "src")
 )
