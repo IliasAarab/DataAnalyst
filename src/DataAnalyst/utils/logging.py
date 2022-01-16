@@ -28,8 +28,11 @@ class LoggerConfiguration:
     def __init__(self) -> None:
         """Log level & handler are read from logging.json config file.
         In case you want to overwrite the configs, use the set_logger args."""
-        self.log_level = self.get_config("logging.json", "LOG_LEVEL")
-        self.handler = self.get_config("logging.json", "HANDLER")
+        try:
+            self.log_level = self.get_config("logging.json", "LOG_LEVEL")
+            self.handler = self.get_config("logging.json", "HANDLER")
+        except:
+            pass
 
     def get_config(self, config_key: str, config_file: str = "logging.json") -> str:
         """Get configuration settings from config file.
@@ -100,6 +103,6 @@ class LoggerConfiguration:
 
 
 # Create logger
-log_config = LoggerConfiguration()
-log_config.set_logger()
-logger = log_config.logger
+# log_config = LoggerConfiguration()
+# log_config.set_logger()
+# logger = log_config.logger
