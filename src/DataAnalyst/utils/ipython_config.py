@@ -105,7 +105,7 @@ class IPythonConfig:
         if lib == True:
             lib = ["pandas", "numpy", "plotly", "matplotlib", "tensorflow"]
         elif isinstance(lib, list):
-            lib = [i.lower() for i in list]
+            lib = [i.lower() for i in lib]
         else:
             raise AttributeError("lib should be bool or list of strings!")
 
