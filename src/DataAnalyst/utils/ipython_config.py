@@ -11,6 +11,7 @@ import plotly.io as pio
 import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 ## Settings for Jupyter Notebook
 # -----------------------------------------------------------
@@ -60,15 +61,13 @@ class IPythonConfig:
 
     @staticmethod
     def set_autoreload():
-        """Activates autoreload magic command to automatically reload in-house modules whenever a change in the module happens.
-        """
+        """Activates autoreload magic command to automatically reload in-house modules whenever a change in the module happens."""
         get_ipython().magic(f"%reload_ext autoreload")
         get_ipython().magic(f"%autoreload 2")
 
     @staticmethod
     def reset_config():
-        """Resets configuration to initial state when Kernel started.
-        """
+        """Resets configuration to initial state when Kernel started."""
 
         # Revert cwd
         try:
@@ -109,6 +108,10 @@ class IPythonConfig:
         else:
             raise AttributeError("lib should be bool or list of strings!")
 
+        
+        import warnings
+        warnings.simplefilter(action='ignore', category=FutureWarning)
+        
         if "pandas" in lib:
             pd.options.mode.chained_assignment = None
             pd.options.plotting.backend = "plotly"
@@ -125,7 +128,7 @@ class IPythonConfig:
             )
 
         if "numpy" in lib:
-            np.set_printoptions(precision=2)
+            np.set_printoptions(precision=2, suppress=True)
 
         if "plotly" in lib:
             pio.renderers.default = "notebook+pdf+vscode+jupyterlab"
@@ -142,7 +145,6 @@ class IPythonConfig:
             get_ipython().magic(f"%config InlineBackend.figure_format = 'png'")
             get_ipython().magic(f"%matplotlib inline")
             set_matplotlib_formats("pdf", "png")
-            plt.rcParams["savefig.dpi"] = 75
             plt.rcParams["figure.autolayout"] = False
             plt.rcParams["figure.figsize"] = 10, 6
             plt.rcParams["axes.labelsize"] = 18
@@ -157,4 +159,17 @@ class IPythonConfig:
             plt.rcParams[
                 "text.latex.preamble"
             ] = r"\usepackage{subdepth}, \usepackage{type1cm}"
-
+            sns.set_context(context="notebook", font_scale=1.2)
+            sns.set(rc={"figure.dpi": 100, "savefig.dpi": 600})
+            set_matplotlib_formats("retina")
+            sns.set_style(
+                "ticks",
+                {
+                    "axes.grid": True,
+                    "grid.linestyle": ":",
+                    "grid.alpha": 1,
+                    "grid.color": "#343434",
+                    "lines.linewidth": 2.5,
+                    "xtick.bottom": True,
+                },
+            )
