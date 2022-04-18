@@ -131,7 +131,7 @@ class IPythonConfig:
             np.set_printoptions(precision=2, suppress=True)
 
         if "plotly" in lib:
-            pio.renderers.default = "notebook+pdf+vscode+jupyterlab"
+            pio.renderers.default = "notebook+pdf+vscode+jupyterlab+colab"
             pio.templates.default = "ggplot2"
             IPythonConfig.plotly_config = {"staticPlot": True}
 
