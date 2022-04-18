@@ -22,8 +22,8 @@ import plotly.io as pio
 import plotly.express as px
 import plotly.graph_objects as go
 
-# Excel libs
-from win32com.client import Dispatch
+# Excel libs (only for Windows OS)
+# from win32com.client import Dispatch
 
 # import openpyxl
 
