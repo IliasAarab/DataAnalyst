@@ -12,7 +12,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+try:
+    from met_brewer.palettes import dwdw
+except (ModuleNotFoundError, ImportError):
+    print("""met_brewer is missing, install using 'pip install "git+https://github.com/BlakeRMills/MetBrewer.git#subdirectory=Python"' """)
+    
+    
 ## Settings for Jupyter Notebook
 # -----------------------------------------------------------
 # Option to turn Jedi off in case it messes up autocompletion
@@ -132,7 +137,10 @@ class IPythonConfig:
 
         if "plotly" in lib:
             pio.renderers.default = "notebook+pdf+vscode+jupyterlab+colab"
-            pio.templates.default = "ggplot2"
+            pio.templates["metbrewer"] = go.layout.Template(
+            layout=go.Layout(colorway=met_brew(name="Greek", brew_type="discrete"))
+                                         )
+            pio.templates.default = "plotly_white+presentation+metbrewer"
             IPythonConfig.plotly_config = {"staticPlot": True}
 
         if "tf" in lib or "tensorflow" in lib:
@@ -160,6 +168,7 @@ class IPythonConfig:
                 "text.latex.preamble"
             ] = r"\usepackage{subdepth}, \usepackage{type1cm}"
             sns.set_context(context="notebook", font_scale=1.2)
+            sns.set_palette(met_brew(name="Greek", brew_type="discrete")) 
             sns.set(rc={"figure.dpi": 100, "savefig.dpi": 600})
             set_matplotlib_formats("retina")
             sns.set_style(
