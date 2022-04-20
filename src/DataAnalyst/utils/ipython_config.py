@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import seaborn as sns
 try:
-    from met_brewer.palettes import dwdw
+    from met_brewer.palettes import met_brew
 except (ModuleNotFoundError, ImportError):
     print("""met_brewer is missing, install using 'pip install "git+https://github.com/BlakeRMills/MetBrewer.git#subdirectory=Python"' """)
     
