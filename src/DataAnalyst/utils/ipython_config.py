@@ -149,9 +149,11 @@ class IPythonConfig:
         if "matplotlib" in lib:
             import matplotlib.font_manager
             from matplotlib_inline.backend_inline import set_matplotlib_formats
-
-            get_ipython().magic(f"%config InlineBackend.figure_format = 'png'")
-            get_ipython().magic(f"%matplotlib inline")
+            try:
+                get_ipython().magic(f"%config InlineBackend.figure_format = 'png'")
+                get_ipython().magic(f"%matplotlib inline")
+            except NameError:
+                pass
             set_matplotlib_formats("pdf", "png")
             plt.rcParams["figure.autolayout"] = False
             plt.rcParams["figure.figsize"] = 10, 6
